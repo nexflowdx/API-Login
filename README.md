@@ -1,35 +1,84 @@
-﻿# API Login
+﻿# 🔐 API Login
 
-Primeiro projeto do meu portfólio de backend. Uma API profissional com FastAPI, PostgreSQL e autenticação JWT — que depois vai virar a base de autenticação da Nexflow DX.
+Documentação da construção de uma API de autenticação profissional com FastAPI, PostgreSQL e JWT, seguindo boas práticas de backend e segurança.
 
-## Status atual
+## 🎯 Objetivo
 
-🟢 Fase 0 – Planejamento — concluída
-🟢 Fase 1 – Preparando o ambiente — concluída
+Este repositório documenta minha jornada de aprendizado na construção de uma API de autenticação do zero, desde o planejamento até a publicação em produção.
 
-## O que foi feito até aqui
+Além de servir como material de estudo, este projeto funciona como um portfólio técnico, registrando cada etapa, as decisões tomadas e as boas práticas aplicadas.
 
-### Fase 0 – Planejamento
-Entendimento do fluxo completo do projeto: como FastAPI, PostgreSQL e JWT trabalham juntos para cadastro, login e proteção de rotas.
+## 🏗️ Arquitetura do Projeto
 
-### Fase 1 – Preparando o ambiente
-- Estrutura inicial do projeto criada
-- Ambiente virtual Python configurado (`.venv`)
-- Git e GitHub configurados para versionamento
-- `.gitignore` configurado para excluir `.venv`, arquivos de cache e futuros segredos (`.env`)
+Esta arquitetura foi construída com foco em segurança, organização e preparação para servir como base de autenticação de outros projetos (Nexflow DX, SCME, agentes de IA).
 
-## Stack
+A API utiliza FastAPI como framework principal, PostgreSQL como banco de dados, SQLAlchemy como ORM, e JWT para autenticação de rotas protegidas.
 
-- FastAPI
-- PostgreSQL
-- SQLAlchemy
-- JWT (python-jose)
-- Passlib + Bcrypt
-- Uvicorn
+## 🏗️ Pilha
 
-## Roadmap completo
+* FastAPI
+* Uvicorn
+* PostgreSQL
+* SQLAlchemy
+* Passlib + Bcrypt
+* Python-Jose (JWT)
+* Docker (deploy)
 
-O projeto segue um roadmap de 14 fases, cobrindo desde a estrutura inicial até a publicação em VPS com integração ao n8n.
+## 📚 Documentação
+
+O projeto foi dividido em 14 etapas:
+
+1. Planejamento
+2. Preparação do ambiente
+3. Estrutura profissional
+4. Primeira API
+5. Banco de dados
+6. Modelagem
+7. Cadastro de usuários
+8. Segurança (hash de senha)
+9. Login
+10. JWT
+11. Rotas protegidas
+12. CRUD completo
+13. Integração com n8n
+14. Publicação (Docker, VPS, EasyPanel)
+
+A documentação completa está disponível na pasta:
+[/docs](https://github.com/nexflowdx/API-Login/blob/main/docs)
+
+## 📋 Roteiro
+
+* [x] Planejamento do fluxo completo
+* [x] Ambiente virtual (venv)
+* [x] Git e GitHub configurados
+* [x] Estrutura de pastas do app
+* [ ] Primeira rota (GET /status)
+* [ ] Conexão com PostgreSQL
+* [ ] Modelagem da tabela de usuários
+* [ ] Cadastro de usuários (POST /usuarios)
+* [ ] Hash de senha (bcrypt)
+* [ ] Login (POST /login)
+* [ ] Geração e validação de JWT
+* [ ] Rotas protegidas (GET /me)
+* [ ] CRUD completo de usuários
+* [ ] Integração com n8n
+* [ ] Publicação (Docker + VPS)
+
+## 📚 Documentação
+
+Cada etapa deste projeto será documentada contendo:
+
+* Objetivo
+* Motivação
+* Pré-requisitos
+* Passo a passo
+* Como validar a configuração
+* Lições aprendidas
+
+## 🧠 Considerações finais
+
+Leia mais sobre o processo de construção:
+[SOBRE-O-PROJETO.md](https://github.com/nexflowdx/API-Login/blob/main/SOBRE-O-PROJETO.md)
 
 ---
-*Documentado em: 03/08/2026 23:22*
+*Documentado em: 04/08/2026 07:52*
