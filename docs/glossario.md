@@ -134,4 +134,24 @@ Referência rápida dos comandos e conceitos usados em cada fase do projeto.
 
 ---
 
-*Última atualização: 05/08/2026 22:44*
+## Fase 6 — Cadastro
+
+### Pydantic (schemas)
+
+| Conceito | O que é |
+|---|---|
+| `pip install pydantic[email]` | Instala suporte à validação de formato de email |
+| `class UsuarioCreate(BaseModel):` | Define o formato de dados que a API espera receber |
+| `EmailStr` | Tipo do Pydantic que valida se o valor tem formato de email válido |
+| `class Config: from_attributes = True` | Permite converter um objeto SQLAlchemy diretamente em um schema de resposta |
+
+### FastAPI — banco e dependências
+
+| Conceito | O que é |
+|---|---|
+| `def get_db(): ... yield db ... finally: db.close()` | Função que abre e garante o fechamento de uma sessão do banco a cada requisição |
+| `Depends(get_db)` | Injeta o resultado de `get_db()` como parâmetro da rota (Dependency Injection) |
+| `@app.post("/rota", response_model=Schema)` | Registra uma rota POST, validando o formato da resposta contra o schema indicado |
+| `db.add(obj)` / `db.commit()` / `db.refresh(obj)` | Adiciona, salva definitivamente, e recarrega um objeto com dados gerados pelo banco (como o `id`) |
+
+*Última atualização: 05/08/2026 22:59*
