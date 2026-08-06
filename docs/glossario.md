@@ -1,10 +1,10 @@
 ﻿# 📖 Glossário — Projeto API Login
 
-Referência rápida dos comandos e conceitos usados até a Fase 2. Vou atualizando conforme avançamos.
+Referência rápida dos comandos e conceitos usados em cada fase do projeto.
 
 ---
 
-## 🖥️ Comandos PowerShell
+## Fase 1 — Preparação do ambiente
 
 ### Navegação e arquivos
 
@@ -24,7 +24,7 @@ Referência rápida dos comandos e conceitos usados até a Fase 2. Vou atualizan
 | `.\.venv\Scripts\Activate.ps1` | Ativa o ambiente virtual (o VS Code costuma fazer isso sozinho ao abrir o terminal) |
 | `pip install <pacotes>` | Instala bibliotecas Python dentro do ambiente virtual ativo |
 
-### Diagnóstico (usados para resolver o problema de PATH)
+### Diagnóstico de PATH (Python)
 
 | Comando | O que faz |
 |---|---|
@@ -49,6 +49,10 @@ Referência rápida dos comandos e conceitos usados até a Fase 2. Vou atualizan
 | `git push -u origin master` | Envia os commits locais para o GitHub (a primeira vez, fixando a conexão) |
 | `git push` | Envia novos commits (depois do primeiro `push -u`) |
 
+---
+
+## Fase 2 — Estrutura profissional
+
 ### PowerShell — manipulação de texto (script de data)
 
 | Comando/conceito | O que faz |
@@ -58,50 +62,76 @@ Referência rápida dos comandos e conceitos usados até a Fase 2. Vou atualizan
 | `Set-Content <arquivo> -Encoding UTF8` | Grava conteúdo de volta em um arquivo |
 | `Get-Date -Format "dd/MM/yyyy HH:mm"` | Gera a data e hora atuais no formato especificado |
 | `param([string]$Nome)` | Declara um parâmetro reutilizável dentro de um script `.ps1` |
+| `.\scripts\set-data.ps1 -Arquivo <caminho>` | Roda o script reutilizável de data, passando o arquivo alvo como parâmetro |
 
 ---
 
-## 🐍 Bibliotecas Python do projeto
+## Fase 3 — Primeira API
 
-Ainda não escrevemos código Python de verdade (isso começa na Fase 3), mas já instalamos e entendemos o papel de cada biblioteca:
+### Bibliotecas Python
 
 | Biblioteca | Papel no projeto |
 |---|---|
 | **FastAPI** | Framework principal — cria as rotas da API (`/login`, `/usuarios`, etc.) |
 | **Uvicorn** | Servidor que roda a aplicação FastAPI e escuta requisições |
-| **SQLAlchemy** | ORM — permite representar tabelas do PostgreSQL como classes Python |
-| **Passlib** | Gerencia o hashing de senhas antes de salvar no banco |
-| **Bcrypt** | Algoritmo de criptografia usado por baixo dos panos pelo Passlib |
-| **python-jose** | Cria e valida tokens JWT (autenticação) |
+
+### Código FastAPI
+
+| Conceito | O que é |
+|---|---|
+| `app = FastAPI()` | Cria a instância principal da aplicação |
+| `@app.get("/rota")` | Decorador — registra a função abaixo como responsável por responder GET nessa rota |
+| `uvicorn app.main:app --reload` | Roda o servidor local, reiniciando automaticamente a cada mudança salva |
 
 ---
 
-## 🐘 PostgreSQL e SQL
+## Fase 4 — Banco de dados
+
+### PostgreSQL e SQL
 
 | Comando | O que faz |
 |---|---|
 | `psql --version` | Confirma se o cliente de linha de comando do PostgreSQL está instalado e acessível |
 | `psql -U postgres` | Entra no console do PostgreSQL como o usuário `postgres` (pede senha) |
 | `CREATE DATABASE nome;` | Cria um banco de dados novo (comando SQL — sempre termina com `;`) |
-| `\l` | Lista todos os bancos de dados existentes (atalho do console `psql`, não é SQL puro) |
+| `\l` | Lista todos os bancos de dados existentes (atalho do console `psql`) |
 | `\q` | Sai do console do `psql` |
+| `psql -U postgres -d <banco> -c "\d <tabela>"` | Mostra a estrutura de uma tabela específica sem precisar entrar no console interativo |
 
-## 🐍 Python — leitura de variáveis de ambiente
+### Python — variáveis de ambiente
 
 | Código/conceito | O que faz |
 |---|---|
 | `pip install python-dotenv` | Instala a biblioteca que lê arquivos `.env` |
-| `from dotenv import load_dotenv` | Importa a função que carrega o `.env` |
 | `load_dotenv()` | Lê o arquivo `.env` da raiz do projeto e carrega suas variáveis na memória |
-| `os.getenv("NOME_VARIAVEL")` | Busca o valor de uma variável de ambiente (ex: a senha do banco) sem expor ela no código |
+| `os.getenv("NOME_VARIAVEL")` | Busca o valor de uma variável de ambiente (ex: senha do banco) sem expor ela no código |
 | `python -c "código aqui"` | Roda uma linha de código Python direto no terminal, sem criar um arquivo — útil para testes rápidos |
 
-## 🔗 SQLAlchemy — conexão com banco
+### SQLAlchemy — conexão
 
 | Conceito | O que é |
 |---|---|
-| `create_engine(url)` | Cria o "motor" de conexão com o banco, a partir da URL de conexão |
-| `sessionmaker(...)` | Cria uma "fábrica" de sessões — cada sessão é uma conversa individual com o banco |
-| `declarative_base()` | Cria a classe base que as tabelas (`models.py`) vão herdar para virarem tabelas reais no banco |
+| **SQLAlchemy** | ORM — permite representar tabelas do PostgreSQL como classes Python |
+| **psycopg2-binary** | Driver que permite ao SQLAlchemy se conectar de fato ao PostgreSQL |
+| `create_engine(url)` | Cria o motor de conexão com o banco, a partir da URL de conexão |
+| `sessionmaker(...)` | Cria uma fábrica de sessões — cada sessão é uma conversa individual com o banco |
+| `declarative_base()` | Cria a classe base (`Base`) que as tabelas em `models.py` herdam para virarem tabelas reais |
 
-*Documentado em: 05/08/2026 22:25*
+---
+
+## Fase 5 — Modelagem
+
+### SQLAlchemy — definição de tabelas
+
+| Conceito | O que é |
+|---|---|
+| `class Usuario(Base):` | Define uma classe que representa uma tabela, herdando de `Base` |
+| `__tablename__ = "usuarios"` | Define o nome real da tabela no PostgreSQL |
+| `Column(Integer, primary_key=True, index=True)` | Define uma coluna numérica como chave primária e indexada |
+| `Column(String, nullable=False)` | Define uma coluna de texto obrigatória |
+| `Column(String, unique=True, index=True, nullable=False)` | Define uma coluna de texto obrigatória, única e indexada (ex: email) |
+| `Base.metadata.create_all(bind=engine)` | Cria fisicamente no banco todas as tabelas registradas em `Base` |
+
+---
+
+*Última atualização: 05/08/2026 22:44*
