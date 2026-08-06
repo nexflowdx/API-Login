@@ -76,4 +76,32 @@ Ainda não escrevemos código Python de verdade (isso começa na Fase 3), mas j�
 
 ---
 
-*Última atualização: 04/08/2026 09:12*
+## 🐘 PostgreSQL e SQL
+
+| Comando | O que faz |
+|---|---|
+| `psql --version` | Confirma se o cliente de linha de comando do PostgreSQL está instalado e acessível |
+| `psql -U postgres` | Entra no console do PostgreSQL como o usuário `postgres` (pede senha) |
+| `CREATE DATABASE nome;` | Cria um banco de dados novo (comando SQL — sempre termina com `;`) |
+| `\l` | Lista todos os bancos de dados existentes (atalho do console `psql`, não é SQL puro) |
+| `\q` | Sai do console do `psql` |
+
+## 🐍 Python — leitura de variáveis de ambiente
+
+| Código/conceito | O que faz |
+|---|---|
+| `pip install python-dotenv` | Instala a biblioteca que lê arquivos `.env` |
+| `from dotenv import load_dotenv` | Importa a função que carrega o `.env` |
+| `load_dotenv()` | Lê o arquivo `.env` da raiz do projeto e carrega suas variáveis na memória |
+| `os.getenv("NOME_VARIAVEL")` | Busca o valor de uma variável de ambiente (ex: a senha do banco) sem expor ela no código |
+| `python -c "código aqui"` | Roda uma linha de código Python direto no terminal, sem criar um arquivo — útil para testes rápidos |
+
+## 🔗 SQLAlchemy — conexão com banco
+
+| Conceito | O que é |
+|---|---|
+| `create_engine(url)` | Cria o "motor" de conexão com o banco, a partir da URL de conexão |
+| `sessionmaker(...)` | Cria uma "fábrica" de sessões — cada sessão é uma conversa individual com o banco |
+| `declarative_base()` | Cria a classe base que as tabelas (`models.py`) vão herdar para virarem tabelas reais no banco |
+
+*Documentado em: 05/08/2026 22:25*
