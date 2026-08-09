@@ -186,5 +186,21 @@ Referência rápida dos comandos e conceitos usados em cada fase do projeto.
 | `db.query(Tabela).filter(condição).first()` | Busca no banco a primeira linha que bate com a condição, ou `None` se não achar |
 | `Tabela.campo == valor` | Sintaxe de comparação usada dentro do `.filter()` |
 
-*Documentado em: 09/08/2026 14:52*
+---
+
+## Fase 9 — JWT
+
+### Datas e JWT
+
+| Conceito | O que é |
+|---|---|
+| `from datetime import datetime, timedelta` | `datetime` representa um momento no tempo; `timedelta` representa uma duração (ex: 30 minutos) |
+| `datetime.utcnow()` | Retorna a data/hora atual em UTC |
+| `datetime.utcnow() + timedelta(minutes=30)` | Calcula "daqui a 30 minutos" a partir de agora |
+| `from jose import jwt` | Importa o módulo de criação/validação de tokens JWT (pacote `python-jose`) |
+| `jwt.encode(dados, SECRET_KEY, algorithm=ALGORITHM)` | Monta e assina um token JWT a partir de um dicionário de dados |
+| `"sub"` | Campo padrão do JWT para identificar o "dono" do token (ex: email do usuário) |
+| `"exp"` | Campo padrão do JWT para a data de expiração |
+
+*Documentado em: 09/08/2026 20:18*
 

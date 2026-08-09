@@ -2,7 +2,8 @@ from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.database import SessionLocal
 from app import models, schemas
-from app.auth import hash_senha, verificar_senha
+from app.auth import hash_senha, verificar_senha, criar_token
+
 
 app = FastAPI()
 
@@ -44,4 +45,5 @@ def login(login: schemas.UsuarioLogin, db: Session = Depends(get_db)):
     if not verificar_senha(login.senha, usuario.senha):
         raise HTTPException(status_code=401, detail="Email ou senha incorretos")
 
-    return {"mensagem": "Login realizado com sucesso"}
+    token = criar_token({"sub": usuario.email})
+    return {"access_token": token, "token_type": "bearer"}
