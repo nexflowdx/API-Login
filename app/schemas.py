@@ -10,5 +10,9 @@ class UsuarioResponse(BaseModel):
     nome: str
     email: EmailStr
 
+class UsuarioLogin(BaseModel):
+    email: EmailStr
+    senha: str
+
     class Config:
         from_attributes = True

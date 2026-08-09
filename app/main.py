@@ -1,8 +1,8 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.database import SessionLocal
 from app import models, schemas
-from app.auth import hash_senha
+from app.auth import hash_senha, verificar_senha
 
 app = FastAPI()
 
@@ -33,3 +33,15 @@ def criar_usuario(usuario: schemas.UsuarioCreate, db: Session = Depends(get_db))
     db.commit()
     db.refresh(novo_usuario)
     return novo_usuario
+
+@app.post("/login")
+def login(login: schemas.UsuarioLogin, db: Session = Depends(get_db)):
+    usuario = db.query(models.Usuario).filter(models.Usuario.email == login.email).first()
+
+    if usuario is None:
+        raise HTTPException(status_code=401, detail="Email ou senha incorretos")
+
+    if not verificar_senha(login.senha, usuario.senha):
+        raise HTTPException(status_code=401, detail="Email ou senha incorretos")
+
+    return {"mensagem": "Login realizado com sucesso"}

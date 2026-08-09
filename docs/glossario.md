@@ -166,5 +166,25 @@ Referência rápida dos comandos e conceitos usados em cada fase do projeto.
 | `pwd_context.verify(senha, hash_salvo)` | Compara uma senha com um hash, retorna `True`/`False` |
 | `pip install "bcrypt==X.Y.Z"` | Fixa uma versão específica de uma biblioteca, útil para resolver incompatibilidades |`id`) |
 
-*Documentado em: 09/08/2026 12:14*
+---
+
+## Fase 8 — Login
+
+### FastAPI — erros HTTP
+
+| Conceito | O que é |
+|---|---|
+| `from fastapi import HTTPException` | Importa a classe usada para retornar erros HTTP customizados |
+| `raise HTTPException(status_code=401, detail="mensagem")` | Interrompe a execução e devolve um erro HTTP com código e mensagem específicos |
+| `raise` | Dispara um erro de propósito, parando a execução imediatamente naquele ponto |
+| `401 Unauthorized` | Código HTTP que significa "credenciais não confirmadas" (diferente de 404, endereço não encontrado, ou 400, requisição malformada) |
+
+### SQLAlchemy — consulta (query)
+
+| Conceito | O que é |
+|---|---|
+| `db.query(Tabela).filter(condição).first()` | Busca no banco a primeira linha que bate com a condição, ou `None` se não achar |
+| `Tabela.campo == valor` | Sintaxe de comparação usada dentro do `.filter()` |
+
+*Documentado em: 09/08/2026 14:52*
 
