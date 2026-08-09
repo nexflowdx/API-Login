@@ -58,8 +58,8 @@ A documentação completa está disponível na pasta:
 * [x] Cadastro de usuários (POST /usuarios)
 * [x] Hash de senha (bcrypt)
 * [x] Login (POST /login)
-* [ ] Geração e validação de JWT
-* [ ] Rotas protegidas (GET /me)
+* [x] Geração e validação de JWT
+* [x] Rotas protegidas (GET /me)
 * [ ] CRUD completo de usuários
 * [ ] Integração com n8n
 * [ ] Publicação (Docker + VPS)
