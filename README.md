@@ -52,12 +52,12 @@ A documentação completa está disponível na pasta:
 * [x] Ambiente virtual (venv)
 * [x] Git e GitHub configurados
 * [x] Estrutura de pastas do app
-* [ ] Primeira rota (GET /status)
-* [ ] Conexão com PostgreSQL
-* [ ] Modelagem da tabela de usuários
-* [ ] Cadastro de usuários (POST /usuarios)
-* [ ] Hash de senha (bcrypt)
-* [ ] Login (POST /login)
+* [x] Primeira rota (GET /status)
+* [x] Conexão com PostgreSQL
+* [x] Modelagem da tabela de usuários
+* [x] Cadastro de usuários (POST /usuarios)
+* [x] Hash de senha (bcrypt)
+* [x] Login (POST /login)
 * [ ] Geração e validação de JWT
 * [ ] Rotas protegidas (GET /me)
 * [ ] CRUD completo de usuários
