@@ -2,6 +2,7 @@ from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 from app.database import SessionLocal
 from app import models, schemas
+from app.auth import hash_senha
 
 app = FastAPI()
 
@@ -22,10 +23,11 @@ def read_status():
 
 @app.post("/usuarios", response_model=schemas.UsuarioResponse)
 def criar_usuario(usuario: schemas.UsuarioCreate, db: Session = Depends(get_db)):
+    senha = hash_senha(usuario.senha)     
     novo_usuario = models.Usuario(
         nome=usuario.nome,
         email=usuario.email,
-        senha=usuario.senha  # atenção: ainda sem hash, isso vem na Fase 7
+        senha=senha                        
     )
     db.add(novo_usuario)
     db.commit()

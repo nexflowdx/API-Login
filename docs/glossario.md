@@ -152,6 +152,19 @@ Referência rápida dos comandos e conceitos usados em cada fase do projeto.
 | `def get_db(): ... yield db ... finally: db.close()` | Função que abre e garante o fechamento de uma sessão do banco a cada requisição |
 | `Depends(get_db)` | Injeta o resultado de `get_db()` como parâmetro da rota (Dependency Injection) |
 | `@app.post("/rota", response_model=Schema)` | Registra uma rota POST, validando o formato da resposta contra o schema indicado |
-| `db.add(obj)` / `db.commit()` / `db.refresh(obj)` | Adiciona, salva definitivamente, e recarrega um objeto com dados gerados pelo banco (como o `id`) |
+| `db.add(obj)` / `db.commit()` / `db.refresh(obj)` | Adiciona, salva definitivamente, e recarrega um objeto com dados gerados pelo banco (como o ---
 
-*Última atualização: 05/08/2026 22:59*
+## Fase 7 — Segurança (hash de senha)
+
+### Passlib e bcrypt
+
+| Conceito | O que é |
+|---|---|
+| `from passlib.context import CryptContext` | Importa a classe principal de gerenciamento de hash |
+| `CryptContext(schemes=["bcrypt"], deprecated="auto")` | Configura o contexto para usar bcrypt como algoritmo |
+| `pwd_context.hash(senha)` | Gera o hash de uma senha |
+| `pwd_context.verify(senha, hash_salvo)` | Compara uma senha com um hash, retorna `True`/`False` |
+| `pip install "bcrypt==X.Y.Z"` | Fixa uma versão específica de uma biblioteca, útil para resolver incompatibilidades |`id`) |
+
+*Documentado em: 09/08/2026 12:14*
+
