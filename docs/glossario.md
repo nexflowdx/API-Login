@@ -202,5 +202,24 @@ Referência rápida dos comandos e conceitos usados em cada fase do projeto.
 | `"sub"` | Campo padrão do JWT para identificar o "dono" do token (ex: email do usuário) |
 | `"exp"` | Campo padrão do JWT para a data de expiração |
 
-*Documentado em: 09/08/2026 20:18*
+---
+
+## Fase 10 — Rotas protegidas
+
+### FastAPI — autenticação
+
+| Conceito | O que é |
+|---|---|
+| `from fastapi.security import OAuth2PasswordBearer` | Ferramenta que extrai o token do cabeçalho `Authorization` automaticamente |
+| `OAuth2PasswordBearer(tokenUrl="login")` | Configura o esquema de autenticação, informando ao Swagger onde fica a rota de login |
+| `jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])` | Decodifica e valida um token JWT, retornando o payload original |
+| `JWTError` | Exceção lançada pelo `jose` quando o token é inválido, adulterado ou expirado |
+
+### Terminal — testando rotas autenticadas
+
+| Comando | O que faz |
+|---|---|
+| `curl.exe -X GET "<url>" -H "Authorization: Bearer <token>"` | Faz uma requisição GET incluindo o token JWT no cabeçalho, do jeito que uma aplicação real faria |
+
+*Documentado em: 09/08/2026 20:48*
 

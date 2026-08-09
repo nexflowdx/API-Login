@@ -1,8 +1,13 @@
 import os
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
-from jose import jwt
+from jose import jwt, JWTError
 from passlib.context import CryptContext
+from fastapi import Depends, HTTPException
+from fastapi.security import OAuth2PasswordBearer
+from sqlalchemy.orm import Session
+from app.database import SessionLocal
+from app import models
 
 load_dotenv()
 
@@ -29,3 +34,29 @@ def criar_token(dados: dict):
     dados_copia.update({"exp": expira_em})
     token = jwt.encode(dados_copia, SECRET_KEY, algorithm=ALGORITHM)
     return token
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+def get_usuario_atual(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+    excecao_credenciais = HTTPException(status_code=401, detail="Não foi possível validar as credenciais")
+
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        email: str = payload.get("sub")
+        if email is None:
+            raise excecao_credenciais
+    except JWTError:
+        raise excecao_credenciais
+
+    usuario = db.query(models.Usuario).filter(models.Usuario.email == email).first()
+    if usuario is None:
+        raise excecao_credenciais
+
+    return usuario

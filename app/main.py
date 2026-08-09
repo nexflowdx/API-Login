@@ -1,18 +1,9 @@
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
-from app.database import SessionLocal
 from app import models, schemas
-from app.auth import hash_senha, verificar_senha, criar_token
-
+from app.auth import hash_senha, verificar_senha, criar_token, get_db, get_usuario_atual
 
 app = FastAPI()
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 @app.get("/")
 def read_root():
@@ -24,11 +15,11 @@ def read_status():
 
 @app.post("/usuarios", response_model=schemas.UsuarioResponse)
 def criar_usuario(usuario: schemas.UsuarioCreate, db: Session = Depends(get_db)):
-    senha = hash_senha(usuario.senha)     
+    senha = hash_senha(usuario.senha)
     novo_usuario = models.Usuario(
         nome=usuario.nome,
         email=usuario.email,
-        senha=senha                        
+        senha=senha
     )
     db.add(novo_usuario)
     db.commit()
@@ -47,3 +38,7 @@ def login(login: schemas.UsuarioLogin, db: Session = Depends(get_db)):
 
     token = criar_token({"sub": usuario.email})
     return {"access_token": token, "token_type": "bearer"}
+
+@app.get("/me", response_model=schemas.UsuarioResponse)
+def ler_usuario_atual(usuario_atual: models.Usuario = Depends(get_usuario_atual)):
+    return usuario_atual
