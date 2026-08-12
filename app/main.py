@@ -42,3 +42,34 @@ def login(login: schemas.UsuarioLogin, db: Session = Depends(get_db)):
 @app.get("/me", response_model=schemas.UsuarioResponse)
 def ler_usuario_atual(usuario_atual: models.Usuario = Depends(get_usuario_atual)):
     return usuario_atual
+
+@app.get("/usuarios", response_model=list[schemas.UsuarioResponse])
+def listar_usuarios(db: Session = Depends(get_db), usuario_atual: models.Usuario = Depends(get_usuario_atual)):
+    usuarios = db.query(models.Usuario).all()
+    return usuarios
+
+@app.put("/usuarios/{usuario_id}", response_model=schemas.UsuarioResponse)
+def editar_usuario(usuario_id: int, dados: schemas.UsuarioCreate, db: Session = Depends(get_db), usuario_atual: models.Usuario = Depends(get_usuario_atual)):
+    usuario = db.query(models.Usuario).filter(models.Usuario.id == usuario_id).first()
+
+    if usuario is None:
+        raise HTTPException(status_code=404, detail="Usuário não encontrado")
+
+    usuario.nome = dados.nome
+    usuario.email = dados.email
+    usuario.senha = hash_senha(dados.senha)
+
+    db.commit()
+    db.refresh(usuario)
+    return usuario
+
+@app.delete("/usuarios/{usuario_id}")
+def excluir_usuario(usuario_id: int, db: Session = Depends(get_db), usuario_atual: models.Usuario = Depends(get_usuario_atual)):
+    usuario = db.query(models.Usuario).filter(models.Usuario.id == usuario_id).first()
+
+    if usuario is None:
+        raise HTTPException(status_code=404, detail="Usuário não encontrado")
+
+    db.delete(usuario)
+    db.commit()
+    return {"mensagem": "Usuário excluído com sucesso"}

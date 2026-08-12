@@ -221,5 +221,35 @@ Referência rápida dos comandos e conceitos usados em cada fase do projeto.
 |---|---|
 | `curl.exe -X GET "<url>" -H "Authorization: Bearer <token>"` | Faz uma requisição GET incluindo o token JWT no cabeçalho, do jeito que uma aplicação real faria |
 
-*Documentado em: 09/08/2026 20:48*
+## Fase 11 — CRUD completo e testes de autenticação
+
+### FastAPI — exclusão e edição
+
+| Conceito | O que é |
+|---|---|
+| `@app.put("/usuarios/{usuario_id}")` | Rota para editar um usuário existente, usando *path parameter* para identificar qual registro alterar |
+| `@app.delete("/usuarios/{usuario_id}")` | Rota para excluir um usuário existente, também via *path parameter* |
+| `usuario_id: int` | *Path parameter* — parte da própria URL (`/usuarios/2`) que o FastAPI converte automaticamente em variável na função |
+| `db.delete(usuario)` | Marca o registro para exclusão na sessão do SQLAlchemy |
+| `db.commit()` | Confirma a exclusão (ou qualquer alteração) no banco de dados — sem isso, a mudança não é salva de verdade |
+| `raise HTTPException(status_code=404, detail="...")` | Retorna erro 404 quando o `usuario_id` informado não existe no banco |
+
+### HTTP — códigos de status usados nos testes
+
+| Código | Significado | Quando aparece |
+|---|---|---|
+| `401 Unauthorized` | Não autenticado ou credenciais inválidas | Requisição sem token, ou com token inválido/expirado |
+| `404 Not Found` | Recurso não encontrado | `usuario_id` que não existe no banco |
+| `200 OK` | Sucesso | Requisição autenticada e válida |
+
+### Terminal — PowerShell
+
+| Comando | O que faz |
+|---|---|
+| `Invoke-RestMethod -Uri "<url>" -Method Get -Headers $headers` | Faz uma requisição HTTP (GET/POST/PUT/DELETE) incluindo headers, como o token JWT |
+| `$headers = @{ Authorization = "Bearer <token>" }` | Cria um objeto de headers no PowerShell para reutilizar em várias requisições |
+| `[Console]::OutputEncoding` | Mostra qual codificação de caracteres o terminal está usando para exibir texto |
+| `[Console]::OutputEncoding = [System.Text.Encoding]::UTF8` | Corrige o terminal para exibir corretamente caracteres acentuados (UTF-8), evitando texto corrompido tipo `UsuÃ¡rio` |
+
+*Documentado em: 11/08/2026 22:05*
 
