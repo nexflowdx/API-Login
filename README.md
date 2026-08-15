@@ -61,8 +61,9 @@ A documentação completa está disponível na pasta:
 * [x] Geração e validação de JWT
 * [x] Rotas protegidas (GET /me)
 * [x] CRUD completo de usuários
-* [ ] Integração com n8n
 * [x] Publicação (Docker + VPS)
+* [x] Integração com n8n
+
 
 ## 📚 Documentação
 
