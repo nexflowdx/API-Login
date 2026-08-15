@@ -28,20 +28,20 @@ A API utiliza FastAPI como framework principal, PostgreSQL como banco de dados, 
 
 O projeto foi dividido em 14 etapas:
 
-1. Planejamento
-2. Preparação do ambiente
-3. Estrutura profissional
-4. Primeira API
-5. Banco de dados
-6. Modelagem
-7. Cadastro de usuários
-8. Segurança (hash de senha)
-9. Login
-10. JWT
-11. Rotas protegidas
-12. CRUD completo
+00. Planejamento
+01. Preparação do ambiente
+02. Estrutura profissional
+03. Primeira API
+04. Banco de dados
+05. Modelagem
+06. Cadastro de usuários
+07. Segurança (hash de senha)
+08. Login
+09. JWT
+10. Rotas protegidas
+11. CRUD completo
+12. Publicação (Docker, VPS, EasyPanel)
 13. Integração com n8n
-14. Publicação (Docker, VPS, EasyPanel)
 
 A documentação completa está disponível na pasta:
 [/docs](https://github.com/nexflowdx/API-Login/blob/main/docs)
@@ -60,9 +60,9 @@ A documentação completa está disponível na pasta:
 * [x] Login (POST /login)
 * [x] Geração e validação de JWT
 * [x] Rotas protegidas (GET /me)
-* [ ] CRUD completo de usuários
+* [x] CRUD completo de usuários
 * [ ] Integração com n8n
-* [ ] Publicação (Docker + VPS)
+* [x] Publicação (Docker + VPS)
 
 ## 📚 Documentação
 
