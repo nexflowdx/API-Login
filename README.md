@@ -1,18 +1,21 @@
-﻿# 🔐 API Login
+﻿Readme · MD
+🔐 API Login
 
 Documentação da construção de uma API de autenticação profissional com FastAPI, PostgreSQL e JWT, seguindo boas práticas de backend e segurança.
 
-## 🎯 Objetivo
+🎯 Objetivo
 
 Este repositório documenta minha jornada de aprendizado na construção de uma API de autenticação do zero, desde o planejamento até a publicação em produção.
 
 Além de servir como material de estudo, este projeto funciona como um portfólio técnico, registrando cada etapa, as decisões tomadas e as boas práticas aplicadas.
 
-## 🏗️ Arquitetura do Projeto
+🏗️ Arquitetura do Projeto
 
 Esta arquitetura foi construída com foco em segurança, organização e preparação para servir como base de autenticação de outros projetos (Nexflow DX, SCME, agentes de IA).
 
-A API utiliza FastAPI como framework principal, PostgreSQL como banco de dados, SQLAlchemy como ORM, e JWT para autenticação de rotas protegidas.
+A API utiliza FastAPI como framework principal, PostgreSQL como banco de dados, SQLAlchemy como ORM, e JWT para autenticação de rotas protegidas. Publicada em VPS própria via Docker e EasyPanel, com domínio e HTTPS próprios.
+
+API em produção: https://api-login.nexflowdx.cloud
 
 ## 🏗️ Pilha
 
@@ -22,11 +25,12 @@ A API utiliza FastAPI como framework principal, PostgreSQL como banco de dados, 
 * SQLAlchemy
 * Passlib + Bcrypt
 * Python-Jose (JWT)
-* Docker (deploy)
+* Docker
+* EasyPanel + Cloudflare
 
 ## 📚 Documentação
 
-O projeto foi dividido em 14 etapas:
+O projeto foi dividido em 15 etapas:
 
 00. Planejamento
 01. Preparação do ambiente
@@ -40,12 +44,13 @@ O projeto foi dividido em 14 etapas:
 09. JWT
 10. Rotas protegidas
 11. CRUD completo
-12. Publicação (Docker, VPS, EasyPanel)
+12. Deploy mínimo na VPS
 13. Integração com n8n
 14. Hardening final
 
-A documentação completa está disponível na pasta:
-[/docs](https://github.com/nexflowdx/API-Login/blob/main/docs)
+A ordem das fases 12 e 13 foi invertida em relação ao planejamento original: o deploy precisou vir antes da integração com n8n, já que o n8n roda na VPS e não conseguiria alcançar a API enquanto ela só existia localmente.
+
+Cada etapa está documentada com Objetivo, Motivação, Pré-requisitos, Passo a passo, Como validar e Lições aprendidas — disponível na pasta /docs.
 
 ## 📋 Roteiro
 
@@ -62,9 +67,9 @@ A documentação completa está disponível na pasta:
 * [x] Geração e validação de JWT
 * [x] Rotas protegidas (GET /me)
 * [x] CRUD completo de usuários
-* [x] Publicação (Docker + VPS)
+* [x] Deploy mínimo na VPS (Docker + EasyPanel)
 * [x] Integração com n8n
-* [x] Hardening final
+* [x] Hardening final (correção de dívida técnica + domínio próprio)
 
 
 ## 📚 Documentação
@@ -78,10 +83,9 @@ Cada etapa deste projeto será documentada contendo:
 * Como validar a configuração
 * Lições aprendidas
 
-## 🧠 Considerações finais
+🧠 Considerações finais
 
-Leia mais sobre o processo de construção:
-[SOBRE-O-PROJETO.md](https://github.com/nexflowdx/API-Login/blob/main/SOBRE-O-PROJETO.md)
+Leia mais sobre o processo de construção, os tropeços e os aprendizados: SOBRE-O-PROJETO.md
 
 ---
 *Documentado em: 04/08/2026 07:52*
