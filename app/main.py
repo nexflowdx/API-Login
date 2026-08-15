@@ -2,12 +2,16 @@ from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app import models, schemas
 from app.auth import hash_senha, verificar_senha, criar_token, get_db, get_usuario_atual
+from app.database import Base, engine
 
 app = FastAPI()
+
+Base.metadata.create_all(bind=engine)
 
 @app.get("/")
 def read_root():
     return {"mensagem": "API Login está no ar"}
+app = FastAPI()
 
 @app.get("/status")
 def read_status():

@@ -42,6 +42,7 @@ O projeto foi dividido em 14 etapas:
 11. CRUD completo
 12. Publicação (Docker, VPS, EasyPanel)
 13. Integração com n8n
+14. Hardening final
 
 A documentação completa está disponível na pasta:
 [/docs](https://github.com/nexflowdx/API-Login/blob/main/docs)
@@ -63,6 +64,7 @@ A documentação completa está disponível na pasta:
 * [x] CRUD completo de usuários
 * [x] Publicação (Docker + VPS)
 * [x] Integração com n8n
+* [x] Hardening final
 
 
 ## 📚 Documentação
