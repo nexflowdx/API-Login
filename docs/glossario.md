@@ -251,5 +251,45 @@ Referência rápida dos comandos e conceitos usados em cada fase do projeto.
 | `[Console]::OutputEncoding` | Mostra qual codificação de caracteres o terminal está usando para exibir texto |
 | `[Console]::OutputEncoding = [System.Text.Encoding]::UTF8` | Corrige o terminal para exibir corretamente caracteres acentuados (UTF-8), evitando texto corrompido tipo `UsuÃ¡rio` |
 
-*Documentado em: 11/08/2026 22:05*
+## Fase 12 — Deploy mínimo na VPS
+
+### Docker
+
+| Conceito | O que é |
+|---|---|
+| `Dockerfile` | Arquivo de receita que descreve como construir a imagem de um container (que imagem base usar, o que instalar, o que copiar, qual comando rodar) |
+| `FROM python:3.13-slim` | Define a imagem base do container — uma versão enxuta do Python |
+| `WORKDIR /app` | Define a pasta de trabalho dentro do container |
+| `EXPOSE 8000` | Documenta qual porta o container vai escutar (não abre a porta sozinho, é metadado) |
+| Case-sensitivity | Diferença entre Windows (não distingue `Dockerfile` de `dockerfile`) e Linux (distingue) — pode quebrar builds silenciosamente se o nome do arquivo estiver errado |
+
+### Variáveis de ambiente
+
+| Conceito | O que é |
+|---|---|
+| `os.getenv("NOME", "padrao")` | Lê uma variável de ambiente do sistema, com um valor padrão caso ela não exista |
+| Variável de ambiente vs `.env` | O `.env` é só um arquivo que o `load_dotenv()` lê para popular variáveis de ambiente; em produção, as variáveis podem vir direto da plataforma (EasyPanel), sem precisar de arquivo físico |
+
+### EasyPanel
+
+| Conceito | O que é |
+|---|---|
+| Host interno de um serviço | Nome pelo qual outros containers do mesmo projeto acessam um serviço (ex: `nexflow_nexflow-postgres`), diferente de `localhost` |
+| Domínio automático | URL pública com HTTPS gerada automaticamente pelo EasyPanel para cada serviço, sem precisar configurar domínio próprio |
+| Roteamento de porta | Configuração de qual porta interna do container o domínio público deve encaminhar o tráfego |
+
+## Fase 13 — Integração com n8n
+
+### n8n — automação
+
+| Conceito | O que é |
+|---|---|
+| Manual Trigger | Nó que inicia o workflow manualmente, clicando em "Execute workflow", útil para testes antes de ativar um gatilho automático |
+| HTTP Request (nó) | Nó do n8n que faz requisições HTTP (GET, POST, etc.), equivalente ao `Invoke-RestMethod` do PowerShell |
+| `{{ $json.campo }}` | Expressão do n8n que acessa dinamicamente um valor retornado pelo nó anterior, sem precisar copiar/colar manualmente |
+| Send Body / Send Headers | Toggles que habilitam campos para configurar corpo da requisição (JSON) e headers (como `Authorization`) |
+| Execute step | Executa um único nó isoladamente, útil para testar cada etapa antes de rodar o workflow inteiro |
+| Encadeamento de nós | Cada nó recebe automaticamente o output do nó anterior como input — é assim que o token do nó "Login" chega até o nó "Listar Usuarios" sem armazenamento manual |
+
+*Documentado em: 15/08/2026 11:39*
 
