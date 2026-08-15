@@ -66,4 +66,4 @@ A expressão `{{ $json.access_token }}` referencia automaticamente o token retor
 - Validar a integração real com uma ferramenta de automação (não só o acesso direto via terminal) é o que efetivamente comprova que a API está pronta para ser consumida por outros sistemas, que é o propósito real dela dentro do Nexflow DX.
 
 ---
-*Documento gerado em [DATA E HORÁRIO — rodar scripts/set-data.ps1]*
+*Documentado em: 15/08/2026 11:41*
