@@ -11,7 +11,6 @@ Base.metadata.create_all(bind=engine)
 @app.get("/")
 def read_root():
     return {"mensagem": "API Login está no ar"}
-app = FastAPI()
 
 @app.get("/status")
 def read_status():
