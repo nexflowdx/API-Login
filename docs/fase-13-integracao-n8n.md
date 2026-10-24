@@ -34,8 +34,8 @@ Nó **HTTP Request** configurado como:
 - Body:
 ```json
 {
-  "email": "producao@exemplo.com",
-  "senha": "senha123"
+  "email": <email-de-teste>,
+  "senha": <senha-de-teste>
 }
 ```
 
